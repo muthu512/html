@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/muthu512/html.git', branch: 'main'
+                git url: 'https://github.com/muthu512/html.git', branch: 'master'
             }
         }
         stage('Install Dependencies') {
