@@ -19,8 +19,9 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
+                    bat '"C:\\Program Files\\nodejs\\node" -v'
                     bat '"C:\\Program Files\\nodejs\\npm" install'
-                }
+
             }
         }
 
