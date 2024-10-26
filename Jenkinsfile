@@ -1,12 +1,21 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Clone Repository') {
             steps {
                 git credentialsId: 'your-credentials-id', url: 'https://github.com/muthu512/html.git', branch: 'master'
             }
         }
+        
+        stage('Check Environment Variables') {
+            steps {
+                script {
+                    bat 'echo %PATH%'
+                }
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 script {
@@ -14,6 +23,7 @@ pipeline {
                 }
             }
         }
+
         stage('Build React App') {
             steps {
                 script {
@@ -21,6 +31,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy') {
             steps {
                 script {
