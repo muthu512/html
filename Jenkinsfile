@@ -23,9 +23,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    bat 'cp -r build/* C:\Users\Dell-Lap\Downloads\Newfolder'
+                    // Use xcopy to copy files from build folder to target directory
+                    bat 'xcopy /s /i /y build\\* "C:\\Users\\Dell-Lap\\Downloads\\Newfolder\\"'
                 }
             }
         }
     }
+}
+
 }
