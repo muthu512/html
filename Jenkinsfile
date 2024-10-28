@@ -61,4 +61,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    bat 'if not exist "C:\\Users\\Dell-Lap\\Downloads\\node\\"
+                    bat 'if not exist "C:\\Users\\Dell-Lap\\Downloads\\node\\" mkdir "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
+                    bat 'xcopy /s /i /y build\\* "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
+                }
+            }
+        }
+    }
+}
