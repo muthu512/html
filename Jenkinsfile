@@ -36,7 +36,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    bat 'xcopy /s /i /y build\\* "C:\\Users\\Dell-Lap\\Downloads\\Newfolder\\"'
+                    bat 'xcopy /s /i /y build\\* "C:\Users\Dell-Lap\Downloads\node"\\"'
                 }
             }
         }
