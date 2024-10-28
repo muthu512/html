@@ -21,7 +21,7 @@ pipeline {
                 script {
                     bat '"C:\\Program Files\\nodejs\\node" -v'
                     bat '"C:\\Program Files\\nodejs\\npm" -v'
-                    bat '"C:\\Program Files\\nodejs\\npm" install || exit 1'
+                    bat '"C:\\Program Files\\nodejs\\npm" ci || exit 1'  // Use npm ci for better CI/CD practices
                 }
             }
         }
@@ -30,8 +30,8 @@ pipeline {
             steps {
                 script {
                     bat '"C:\\Program Files\\nodejs\\npm" run build || exit 1'
-                    // List the contents of the workspace to verify the build directory
-                    bat 'dir'
+                    // List the contents of the build directory to verify
+                    bat 'dir build'
                 }
             }
         }
@@ -40,7 +40,9 @@ pipeline {
             steps {
                 script {
                     bat 'if not exist "C:\\Users\\Dell-Lap\\Downloads\\node\\" mkdir "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
-                    bat 'xcopy /s /i /y build\\* "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
+                    bat 'xcopy /S /I /Y "build\\*" "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
+                    // List the contents of the deployment directory to verify
+                    bat 'dir "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
                 }
             }
         }
