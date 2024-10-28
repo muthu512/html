@@ -36,9 +36,10 @@ pipeline {
         stage('Verify Build Directory') {
             steps {
                 script {
-                    def buildExists = fileExists('build')
-                    if (!buildExists) {
-                        error "Build directory not found! Verify the build step."
+                    // List files in the workspace to verify 'build' folder creation
+                    bat 'dir'
+                    if (!fileExists('build')) {
+                        error 'Build directory not found! Verify the build step.'
                     }
                 }
             }
@@ -47,6 +48,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    // Copy the contents to the desired deployment location
                     bat 'xcopy /s /i /y build\\* "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
                 }
             }
