@@ -33,13 +33,21 @@ pipeline {
             }
         }
 
+        stage('Verify Build Directory') {
+            steps {
+                script {
+                    def buildExists = fileExists('build')
+                    if (!buildExists) {
+                        error "Build directory not found! Verify the build step."
+                    }
+                }
+            }
+        }
+
         stage('Deploy') {
             steps {
                 script {
-                    // Doubling backslashes for Windows paths
                     bat 'xcopy /s /i /y build\\* "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
-                    // OR using forward slashes:
-                    // bat 'xcopy /s /i /y build/* "C:/Users/Dell-Lap/Downloads/node/"'
                 }
             }
         }
