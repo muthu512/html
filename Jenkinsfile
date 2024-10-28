@@ -36,28 +36,6 @@ pipeline {
             }
         }
 
-        stage('Debug') {
-            steps {
-                script {
-                    // List contents of the current workspace
-                    bat 'dir'
-                }
-            }
-        }
-
-        stage('Verify Build Directory') {
-            steps {
-                script {
-                    bat 'dir'
-                    if (!fileExists('build')) {
-                        error 'Build directory not found! Verify the build step.'
-                    } else {
-                        echo 'Build directory found successfully.'
-                    }
-                }
-            }
-        }
-
         stage('Deploy') {
             steps {
                 script {
