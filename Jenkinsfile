@@ -72,4 +72,11 @@ pipeline {
                     // Create the deployment directory if it doesn't exist
                     bat 'if not exist "C:\\Users\\Dell-Lap\\Downloads\\node\\" mkdir "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
                     // Copy the built files to the deployment directory
-                    bat 'xcopy /S /I /Y "C:\\Users\\Dell-Lap\\Downloads\\react-hello-main\\react-hello-main\\build\\*" "C:\
+                    bat 'xcopy /S /I /Y "C:\\Users\\Dell-Lap\\Downloads\\react-hello-main\\react-hello-main\\build\\*" "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
+                    // List the contents of the deployment directory to verify deployment
+                    bat 'dir "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
+                }
+            }
+        }
+    }
+}
