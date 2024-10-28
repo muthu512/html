@@ -16,12 +16,22 @@ pipeline {
             }
         }
 
+        stage('Check for package.json') {
+            steps {
+                script {
+                    // Check if package.json exists
+                    bat 'if exist "package.json" (echo package.json exists) else (echo package.json not found && exit 1)'
+                }
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 script {
                     // Check Node.js and npm versions to ensure they're installed
                     bat '"C:\\Program Files\\nodejs\\node" -v'
                     bat '"C:\\Program Files\\nodejs\\npm" -v'
+                    
                     // Install dependencies using npm ci for clean installs
                     bat '"C:\\Program Files\\nodejs\\npm" ci || exit 1'
                 }
