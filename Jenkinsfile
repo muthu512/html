@@ -21,7 +21,6 @@ pipeline {
                 script {
                     bat '"C:\\Program Files\\nodejs\\node" -v'
                     bat '"C:\\Program Files\\nodejs\\npm" -v'
-                    // Fail the build if dependencies fail to install
                     bat '"C:\\Program Files\\nodejs\\npm" install || exit 1'
                 }
             }
@@ -30,8 +29,9 @@ pipeline {
         stage('Build React App') {
             steps {
                 script {
-                    // Fail the build if the build fails
                     bat '"C:\\Program Files\\nodejs\\npm" run build || exit 1'
+                    // List the contents of the workspace to verify the build directory
+                    bat 'dir'
                 }
             }
         }
