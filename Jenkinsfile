@@ -36,7 +36,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    bat 'xcopy /s /i /y build\\* "C:\Users\Dell-Lap\Downloads\node"\\"'
+                    // Doubling backslashes for Windows paths
+                    bat 'xcopy /s /i /y build\\* "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
+                    // OR using forward slashes:
+                    // bat 'xcopy /s /i /y build/* "C:/Users/Dell-Lap/Downloads/node/"'
                 }
             }
         }
