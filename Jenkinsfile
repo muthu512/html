@@ -21,7 +21,8 @@ pipeline {
                 script {
                     bat '"C:\\Program Files\\nodejs\\node" -v'
                     bat '"C:\\Program Files\\nodejs\\npm" -v'
-                    bat '"C:\\Program Files\\nodejs\\npm" install'
+                    // Fail the build if dependencies fail to install
+                    bat '"C:\\Program Files\\nodejs\\npm" install || exit 1'
                 }
             }
         }
@@ -29,7 +30,17 @@ pipeline {
         stage('Build React App') {
             steps {
                 script {
-                    bat '"C:\\Program Files\\nodejs\\npm" run build'
+                    // Fail the build if the build fails
+                    bat '"C:\\Program Files\\nodejs\\npm" run build || exit 1'
+                }
+            }
+        }
+
+        stage('Debug') {
+            steps {
+                script {
+                    // List contents of the current workspace
+                    bat 'dir'
                 }
             }
         }
@@ -50,10 +61,4 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    bat 'if not exist "C:\\Users\\Dell-Lap\\Downloads\\node\\" mkdir "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
-                    bat 'xcopy /s /i /y build\\* "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
-                }
-            }
-        }
-    }
-}
+                    bat 'if not exist "C:\\Users\\Dell-Lap\\Downloads\\node\\"
